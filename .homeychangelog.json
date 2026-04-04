@@ -4,5 +4,8 @@
   },
   "2.0.0": {
     "en": "SPC panel"
+  },
+  "2.0.2": {
+    "en": "Flow cards toegevoegd voor notificaties- System alert triggers (Tamper, Fault, Communication errors)- Zone alarm triggers (Inbraakdetectie)- Condition cards voor alarm filtering- Automatische detectie van bestaande alarmen bij opstart- Onderscheid tussen systeem alerts en zone alarmen"
   }
 }
