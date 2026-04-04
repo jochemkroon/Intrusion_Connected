@@ -1,0 +1,15 @@
+{
+  "type": "string",
+  "title": {
+    "en": "System Alert",
+    "nl": "Systeem Alarm"
+  },
+  "desc": {
+    "en": "Current system alert (Tamper, Fault, etc.)",
+    "nl": "Huidige systeem alarm (Sabotage, Storing, etc.)"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icon.svg"
+}

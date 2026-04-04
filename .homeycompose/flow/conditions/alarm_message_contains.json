@@ -1,0 +1,29 @@
+{
+  "title": {
+    "en": "Alarm message contains",
+    "nl": "Alarmbericht bevat"
+  },
+  "hint": {
+    "en": "Check if the current alarm message contains specific text",
+    "nl": "Controleer of het huidige alarmbericht specifieke tekst bevat"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    },
+    {
+      "type": "text",
+      "name": "text",
+      "title": {
+        "en": "Text",
+        "nl": "Tekst"
+      },
+      "placeholder": {
+        "en": "e.g. Tamper",
+        "nl": "bijv. Tamper"
+      }
+    }
+  ]
+}

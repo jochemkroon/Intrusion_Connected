@@ -1,0 +1,31 @@
+{
+  "title": {
+    "en": "System alert cleared",
+    "nl": "Systeem alarm opgelost"
+  },
+  "hint": {
+    "en": "This card triggers when a system alert is cleared",
+    "nl": "Deze kaart wordt getriggerd wanneer een systeem alarm wordt opgelost"
+  },
+  "tokens": [
+    {
+      "name": "alert_type",
+      "type": "string",
+      "title": {
+        "en": "Alert type",
+        "nl": "Alarm type"
+      },
+      "example": {
+        "en": "Controller Cabinet Tamper",
+        "nl": "Controller Cabinet Tamper"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}

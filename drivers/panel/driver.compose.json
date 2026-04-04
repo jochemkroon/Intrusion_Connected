@@ -5,8 +5,19 @@
   "class": "homealarm",
   "capabilities": [
     "alarm_generic",
-    "homealarm_state"
+    "homealarm_state",
+    "alarm_message"
   ],
+  "capabilitiesOptions": {
+    "alarm_message": {
+      "title": {
+        "en": "System Alert",
+        "nl": "Systeem Alarm"
+      },
+      "getable": true,
+      "setable": false
+    }
+  },
   "platforms": [
     "local"
   ],

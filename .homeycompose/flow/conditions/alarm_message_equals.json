@@ -1,0 +1,29 @@
+{
+  "title": {
+    "en": "Alarm message is",
+    "nl": "Alarmbericht is"
+  },
+  "hint": {
+    "en": "Check if the current alarm message matches exactly",
+    "nl": "Controleer of het huidige alarmbericht exact overeenkomt"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    },
+    {
+      "type": "text",
+      "name": "message",
+      "title": {
+        "en": "Message",
+        "nl": "Bericht"
+      },
+      "placeholder": {
+        "en": "e.g. Controller Cabinet Tamper",
+        "nl": "bijv. Controller Cabinet Tamper"
+      }
+    }
+  ]
+}

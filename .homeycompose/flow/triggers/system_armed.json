@@ -1,0 +1,31 @@
+{
+  "title": {
+    "en": "System armed",
+    "nl": "Systeem ingeschakeld"
+  },
+  "hint": {
+    "en": "This card triggers when the alarm system is armed (fully or partially)",
+    "nl": "Deze kaart wordt getriggerd wanneer het alarmsysteem wordt ingeschakeld (volledig of deels)"
+  },
+  "tokens": [
+    {
+      "name": "mode",
+      "type": "string",
+      "title": {
+        "en": "Mode",
+        "nl": "Modus"
+      },
+      "example": {
+        "en": "armed",
+        "nl": "armed"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}

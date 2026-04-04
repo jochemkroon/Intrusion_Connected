@@ -1,0 +1,40 @@
+{
+  "title": {
+    "en": "Zone alarm cleared",
+    "nl": "Zone alarm opgelost"
+  },
+  "hint": {
+    "en": "This card triggers when a zone alarm is cleared",
+    "nl": "Deze kaart wordt getriggerd wanneer een zone alarm wordt opgelost"
+  },
+  "tokens": [
+    {
+      "name": "zone_number",
+      "type": "number",
+      "title": {
+        "en": "Zone number",
+        "nl": "Zone nummer"
+      },
+      "example": 2
+    },
+    {
+      "name": "zone_name",
+      "type": "string",
+      "title": {
+        "en": "Zone name",
+        "nl": "Zone naam"
+      },
+      "example": {
+        "en": "PIR Entree",
+        "nl": "PIR Entree"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}

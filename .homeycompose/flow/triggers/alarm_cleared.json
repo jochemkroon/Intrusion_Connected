@@ -1,0 +1,17 @@
+{
+  "title": {
+    "en": "Alarm cleared",
+    "nl": "Alarm opgeheven"
+  },
+  "hint": {
+    "en": "This card triggers when the alarm is cleared",
+    "nl": "Deze kaart wordt getriggerd wanneer het alarm wordt opgeheven"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}

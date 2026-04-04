@@ -1,7 +1,7 @@
 {
   "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
   "id": "com.kroonembedded.intrusion_connected",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "compatibility": ">=12.4.0",
   "sdk": 3,
   "runtime": "nodejs",
@@ -28,6 +28,304 @@
     "name": "Jochem Kroon",
     "email": "9kt5pw9jtr@privaterelay.appleid.com"
   },
+  "flow": {
+    "triggers": [
+      {
+        "title": {
+          "en": "Alarm cleared",
+          "nl": "Alarm opgeheven"
+        },
+        "hint": {
+          "en": "This card triggers when the alarm is cleared",
+          "nl": "Deze kaart wordt getriggerd wanneer het alarm wordt opgeheven"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "alarm_cleared"
+      },
+      {
+        "title": {
+          "en": "System alert active",
+          "nl": "Systeem alarm actief"
+        },
+        "hint": {
+          "en": "This card triggers when a system alert becomes active (Tamper, Fault, etc.)",
+          "nl": "Deze kaart wordt getriggerd wanneer een systeem alarm actief wordt (Sabotage, Storing, etc.)"
+        },
+        "tokens": [
+          {
+            "name": "alert_type",
+            "type": "string",
+            "title": {
+              "en": "Alert type",
+              "nl": "Alarm type"
+            },
+            "example": {
+              "en": "Controller Cabinet Tamper",
+              "nl": "Controller Cabinet Tamper"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "system_alert_active"
+      },
+      {
+        "title": {
+          "en": "System alert cleared",
+          "nl": "Systeem alarm opgelost"
+        },
+        "hint": {
+          "en": "This card triggers when a system alert is cleared",
+          "nl": "Deze kaart wordt getriggerd wanneer een systeem alarm wordt opgelost"
+        },
+        "tokens": [
+          {
+            "name": "alert_type",
+            "type": "string",
+            "title": {
+              "en": "Alert type",
+              "nl": "Alarm type"
+            },
+            "example": {
+              "en": "Controller Cabinet Tamper",
+              "nl": "Controller Cabinet Tamper"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "system_alert_cleared"
+      },
+      {
+        "title": {
+          "en": "System armed",
+          "nl": "Systeem ingeschakeld"
+        },
+        "hint": {
+          "en": "This card triggers when the alarm system is armed (fully or partially)",
+          "nl": "Deze kaart wordt getriggerd wanneer het alarmsysteem wordt ingeschakeld (volledig of deels)"
+        },
+        "tokens": [
+          {
+            "name": "mode",
+            "type": "string",
+            "title": {
+              "en": "Mode",
+              "nl": "Modus"
+            },
+            "example": {
+              "en": "armed",
+              "nl": "armed"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "system_armed"
+      },
+      {
+        "title": {
+          "en": "System disarmed",
+          "nl": "Systeem uitgeschakeld"
+        },
+        "hint": {
+          "en": "This card triggers when the alarm system is disarmed",
+          "nl": "Deze kaart wordt getriggerd wanneer het alarmsysteem wordt uitgeschakeld"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "system_disarmed"
+      },
+      {
+        "title": {
+          "en": "Zone alarm cleared",
+          "nl": "Zone alarm opgelost"
+        },
+        "hint": {
+          "en": "This card triggers when a zone alarm is cleared",
+          "nl": "Deze kaart wordt getriggerd wanneer een zone alarm wordt opgelost"
+        },
+        "tokens": [
+          {
+            "name": "zone_number",
+            "type": "number",
+            "title": {
+              "en": "Zone number",
+              "nl": "Zone nummer"
+            },
+            "example": 2
+          },
+          {
+            "name": "zone_name",
+            "type": "string",
+            "title": {
+              "en": "Zone name",
+              "nl": "Zone naam"
+            },
+            "example": {
+              "en": "PIR Entree",
+              "nl": "PIR Entree"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "zone_alarm_cleared"
+      },
+      {
+        "title": {
+          "en": "Zone alarm triggered",
+          "nl": "Zone alarm geactiveerd"
+        },
+        "hint": {
+          "en": "This card triggers when a zone alarm is triggered (intrusion detection)",
+          "nl": "Deze kaart wordt getriggerd wanneer een zone alarm afgaat (inbraakdetectie)"
+        },
+        "tokens": [
+          {
+            "name": "zone_number",
+            "type": "number",
+            "title": {
+              "en": "Zone number",
+              "nl": "Zone nummer"
+            },
+            "example": 2
+          },
+          {
+            "name": "zone_name",
+            "type": "string",
+            "title": {
+              "en": "Zone name",
+              "nl": "Zone naam"
+            },
+            "example": {
+              "en": "PIR Entree",
+              "nl": "PIR Entree"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "zone_alarm_triggered"
+      }
+    ],
+    "conditions": [
+      {
+        "title": {
+          "en": "Alarm message contains",
+          "nl": "Alarmbericht bevat"
+        },
+        "hint": {
+          "en": "Check if the current alarm message contains specific text",
+          "nl": "Controleer of het huidige alarmbericht specifieke tekst bevat"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          },
+          {
+            "type": "text",
+            "name": "text",
+            "title": {
+              "en": "Text",
+              "nl": "Tekst"
+            },
+            "placeholder": {
+              "en": "e.g. Tamper",
+              "nl": "bijv. Tamper"
+            }
+          }
+        ],
+        "id": "alarm_message_contains"
+      },
+      {
+        "title": {
+          "en": "Alarm message is",
+          "nl": "Alarmbericht is"
+        },
+        "hint": {
+          "en": "Check if the current alarm message matches exactly",
+          "nl": "Controleer of het huidige alarmbericht exact overeenkomt"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          },
+          {
+            "type": "text",
+            "name": "message",
+            "title": {
+              "en": "Message",
+              "nl": "Bericht"
+            },
+            "placeholder": {
+              "en": "e.g. Controller Cabinet Tamper",
+              "nl": "bijv. Controller Cabinet Tamper"
+            }
+          }
+        ],
+        "id": "alarm_message_equals"
+      },
+      {
+        "title": {
+          "en": "Has active alarm",
+          "nl": "Heeft actief alarm"
+        },
+        "hint": {
+          "en": "Check if there is currently an active alarm message",
+          "nl": "Controleer of er momenteel een actief alarmbericht is"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=panel"
+          }
+        ],
+        "id": "has_active_alarm"
+      }
+    ]
+  },
   "drivers": [
     {
       "name": {
@@ -36,8 +334,19 @@
       "class": "homealarm",
       "capabilities": [
         "alarm_generic",
-        "homealarm_state"
+        "homealarm_state",
+        "alarm_message"
       ],
+      "capabilitiesOptions": {
+        "alarm_message": {
+          "title": {
+            "en": "System Alert",
+            "nl": "Systeem Alarm"
+          },
+          "getable": true,
+          "setable": false
+        }
+      },
       "platforms": [
         "local"
       ],
@@ -176,5 +485,22 @@
       ],
       "id": "panel"
     }
-  ]
+  ],
+  "capabilities": {
+    "alarm_message": {
+      "type": "string",
+      "title": {
+        "en": "System Alert",
+        "nl": "Systeem Alarm"
+      },
+      "desc": {
+        "en": "Current system alert (Tamper, Fault, etc.)",
+        "nl": "Huidige systeem alarm (Sabotage, Storing, etc.)"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    }
+  }
 }

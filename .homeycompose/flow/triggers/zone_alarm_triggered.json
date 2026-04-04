@@ -1,0 +1,40 @@
+{
+  "title": {
+    "en": "Zone alarm triggered",
+    "nl": "Zone alarm geactiveerd"
+  },
+  "hint": {
+    "en": "This card triggers when a zone alarm is triggered (intrusion detection)",
+    "nl": "Deze kaart wordt getriggerd wanneer een zone alarm afgaat (inbraakdetectie)"
+  },
+  "tokens": [
+    {
+      "name": "zone_number",
+      "type": "number",
+      "title": {
+        "en": "Zone number",
+        "nl": "Zone nummer"
+      },
+      "example": 2
+    },
+    {
+      "name": "zone_name",
+      "type": "string",
+      "title": {
+        "en": "Zone name",
+        "nl": "Zone naam"
+      },
+      "example": {
+        "en": "PIR Entree",
+        "nl": "PIR Entree"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}

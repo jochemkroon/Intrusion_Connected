@@ -1,0 +1,31 @@
+{
+  "title": {
+    "en": "System alert active",
+    "nl": "Systeem alarm actief"
+  },
+  "hint": {
+    "en": "This card triggers when a system alert becomes active (Tamper, Fault, etc.)",
+    "nl": "Deze kaart wordt getriggerd wanneer een systeem alarm actief wordt (Sabotage, Storing, etc.)"
+  },
+  "tokens": [
+    {
+      "name": "alert_type",
+      "type": "string",
+      "title": {
+        "en": "Alert type",
+        "nl": "Alarm type"
+      },
+      "example": {
+        "en": "Controller Cabinet Tamper",
+        "nl": "Controller Cabinet Tamper"
+      }
+    }
+  ],
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}

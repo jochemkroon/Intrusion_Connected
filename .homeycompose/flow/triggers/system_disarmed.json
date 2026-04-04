@@ -1,0 +1,17 @@
+{
+  "title": {
+    "en": "System disarmed",
+    "nl": "Systeem uitgeschakeld"
+  },
+  "hint": {
+    "en": "This card triggers when the alarm system is disarmed",
+    "nl": "Deze kaart wordt getriggerd wanneer het alarmsysteem wordt uitgeschakeld"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}

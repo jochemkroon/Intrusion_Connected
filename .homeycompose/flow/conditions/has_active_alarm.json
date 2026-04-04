@@ -1,0 +1,17 @@
+{
+  "title": {
+    "en": "Has active alarm",
+    "nl": "Heeft actief alarm"
+  },
+  "hint": {
+    "en": "Check if there is currently an active alarm message",
+    "nl": "Controleer of er momenteel een actief alarmbericht is"
+  },
+  "args": [
+    {
+      "type": "device",
+      "name": "device",
+      "filter": "driver_id=panel"
+    }
+  ]
+}
