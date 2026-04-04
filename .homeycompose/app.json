@@ -1,0 +1,30 @@
+{
+  "id": "com.kroonembedded.intrusion_connected",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Intrusion connected"
+  },
+  "description": {
+    "en": "Unofficial integration for ACRE (VanderBilt) SPC alarm panels via local web interface. Tested with SPC5300 FW 3.14.5"
+  },
+  "category": [
+    "security"
+  ],
+  "permissions": [],
+  "brandColor": "#5A7FA0",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Jochem Kroon",
+    "email": "9kt5pw9jtr@privaterelay.appleid.com"
+  }
+}

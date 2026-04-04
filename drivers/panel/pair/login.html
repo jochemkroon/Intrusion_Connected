@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 20px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #00D7A3;
+    }
+    
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background-color: white;
+    }
+    
+    select:focus {
+      outline: none;
+      border-color: #00D7A3;
+    }
+    
+    .hint {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .error {
+      color: #ff0000;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    button {
+      background-color: #00D7A3;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 14px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+    
+    button:hover {
+      background-color: #00C193;
+    }
+    
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-group">
+    <label for="panel_type">Alarm Panel Type</label>
+    <select id="panel_type" required>
+      <option value="spc4200">SPC 4200/4300</option>
+      <option value="spc5000" selected>SPC 5200/5300</option>
+      <option value="spc6000">SPC 6300</option>
+      <option value="generic">Generic (Other)</option>
+    </select>
+    <div class="hint">Select your alarm panel model</div>
+  </div>
+  
+  <div class="form-group">
+    <label for="host">IP Address or Hostname</label>
+    <input type="text" id="host" placeholder="192.168.1.100" required>
+    <div class="hint">Enter the IP address or hostname of your alarm panel</div>
+  </div>
+  
+  <div class="form-group">
+    <label for="https">
+      <input type="checkbox" id="https" style="width: auto; margin-right: 8px;">
+      Use HTTPS
+    </label>
+    <div class="hint">Enable for HTTPS connection (port 443 instead of 80)</div>
+  </div>
+  
+  <div class="form-group">
+    <label for="username">User ID</label>
+    <input type="text" id="username" placeholder="admin" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter password" required>
+  </div>
+  
+  <div class="form-group">
+    <label for="poll_interval">Poll Interval (seconds)</label>
+    <input type="number" id="poll_interval" value="5" min="1" max="60" required>
+    <div class="hint">How often to check the panel status (default: 5 seconds)</div>
+  </div>
+  
+  <div class="error" id="error-message"></div>
+  
+  <button id="login-button">Connect to Alarm Panel</button>
+
+  <script>
+    const panelTypeSelect = document.getElementById('panel_type');
+    const hostInput = document.getElementById('host');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const pollIntervalInput = document.getElementById('poll_interval');
+    const loginButton = document.getElementById('login-button');
+    const errorMessage = document.getElementById('error-message');
+
+    // Focus on first input
+    panelTypeSelect.focus();
+
+    // Handle enter key
+    [panelTypeSelect, hostInput, usernameInput, passwordInput, pollIntervalInput].forEach(input => {
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          loginButton.click();
+        }
+      });
+    });
+
+    loginButton.addEventListener('click', async () => {
+      errorMessage.style.display = 'none';
+      
+      const panelType = panelTypeSelect.value;
+      const host = hostInput.value.trim();
+      const https = document.getElementById('https').checked;
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value;
+      const pollInterval = parseInt(pollIntervalInput.value);
+
+      // Validate inputs
+      if (!host || !username || !password) {
+        errorMessage.textContent = 'Please fill in all fields';
+        errorMessage.style.display = 'block';
+        return;
+      }
+
+      if (!pollInterval || pollInterval < 1 || pollInterval > 60) {
+        errorMessage.textContent = 'Poll interval must be between 1 and 60 seconds';
+        errorMessage.style.display = 'block';
+        return;
+      }
+
+      // Disable button and show loading state
+      loginButton.disabled = true;
+      loginButton.textContent = 'Connecting...';
+
+      try {
+        // Emit login event to driver
+        await Homey.emit('login', {
+          panel_type: panelType,
+          host,
+          https,
+          username,
+          password,
+          poll_interval: pollInterval,
+        });
+        
+        // The driver will handle the next step
+        await Homey.nextView();
+      } catch (error) {
+        errorMessage.textContent = error.message || 'Connection failed. Please check your settings.';
+        errorMessage.style.display = 'block';
+        loginButton.disabled = false;
+        loginButton.textContent = 'Connect to Alarm Panel';
+      }
+    });
+  </script>
+</body>
+</html>

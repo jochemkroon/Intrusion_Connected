@@ -1,0 +1,111 @@
+{
+  "name": {
+    "en": "SPC Panel"
+  },
+  "class": "homealarm",
+  "capabilities": [
+    "alarm_generic",
+    "homealarm_state"
+  ],
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "lan"
+  ],
+  "images": {
+    "small": "/drivers/panel/assets/images/small.png",
+    "large": "/drivers/panel/assets/images/large.png",
+    "xlarge": "/drivers/panel/assets/images/xlarge.png"
+  },
+  "pair": [
+    {
+      "id": "login",
+      "navigation": {
+        "next": "list_devices"
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "settings": [
+    {
+      "type": "group",
+      "label": {
+        "en": "Connection Settings"
+      },
+      "children": [
+        {
+          "id": "host",
+          "type": "text",
+          "label": {
+            "en": "IP Address or Hostname"
+          },
+          "value": "",
+          "hint": {
+            "en": "The IP address or hostname of your SPC panel"
+          }
+        },
+        {
+          "id": "port",
+          "type": "number",
+          "label": {
+            "en": "Port"
+          },
+          "value": 8088,
+          "min": 1,
+          "max": 65535,
+          "hint": {
+            "en": "The port number (default: 8088)"
+          }
+        },
+        {
+          "id": "username",
+          "type": "text",
+          "label": {
+            "en": "User ID"
+          },
+          "value": ""
+        },
+        {
+          "id": "password",
+          "type": "password",
+          "label": {
+            "en": "Password"
+          },
+          "value": ""
+        }
+      ]
+    },
+    {
+      "type": "group",
+      "label": {
+        "en": "Advanced Settings"
+      },
+      "children": [
+        {
+          "id": "poll_interval",
+          "type": "number",
+          "label": {
+            "en": "Poll Interval (seconds)"
+          },
+          "value": 5,
+          "min": 1,
+          "max": 60,
+          "hint": {
+            "en": "How often to check the panel status"
+          }
+        }
+      ]
+    }
+  ]
+}

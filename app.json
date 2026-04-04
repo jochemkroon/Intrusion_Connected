@@ -1,0 +1,180 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.kroonembedded.intrusion_connected",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "Intrusion connected"
+  },
+  "description": {
+    "en": "Unofficial integration for ACRE (VanderBilt) SPC alarm panels via local web interface. Tested with SPC5300 FW 3.14.5"
+  },
+  "category": [
+    "security"
+  ],
+  "permissions": [],
+  "brandColor": "#5A7FA0",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Jochem Kroon",
+    "email": "9kt5pw9jtr@privaterelay.appleid.com"
+  },
+  "drivers": [
+    {
+      "name": {
+        "en": "Alarm Panel"
+      },
+      "class": "homealarm",
+      "capabilities": [
+        "alarm_generic",
+        "homealarm_state"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "lan"
+      ],
+      "images": {
+        "small": "/drivers/panel/assets/images/small.png",
+        "large": "/drivers/panel/assets/images/large.png",
+        "xlarge": "/drivers/panel/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "login",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Connection Settings"
+          },
+          "children": [
+            {
+              "id": "panel_type",
+              "type": "dropdown",
+              "label": {
+                "en": "Alarm Panel Type"
+              },
+              "value": "spc4200",
+              "values": [
+                {
+                  "id": "spc4200",
+                  "label": {
+                    "en": "SPC 4200/4300"
+                  }
+                },
+                {
+                  "id": "spc5000",
+                  "label": {
+                    "en": "SPC 5200/5300"
+                  }
+                },
+                {
+                  "id": "spc6000",
+                  "label": {
+                    "en": "SPC 6300"
+                  }
+                },
+                {
+                  "id": "generic",
+                  "label": {
+                    "en": "Generic (Other)"
+                  }
+                }
+              ],
+              "hint": {
+                "en": "Select your alarm panel model"
+              }
+            },
+            {
+              "id": "host",
+              "type": "text",
+              "label": {
+                "en": "IP Address or Hostname"
+              },
+              "value": "",
+              "hint": {
+                "en": "The IP address or hostname of your alarm panel"
+              }
+            },
+            {
+              "id": "https",
+              "type": "checkbox",
+              "label": {
+                "en": "Use HTTPS"
+              },
+              "value": false,
+              "hint": {
+                "en": "Enable HTTPS connection (port 443 instead of 80)"
+              }
+            },
+            {
+              "id": "username",
+              "type": "text",
+              "label": {
+                "en": "User ID"
+              },
+              "value": ""
+            },
+            {
+              "id": "password",
+              "type": "password",
+              "label": {
+                "en": "Password"
+              },
+              "value": ""
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Advanced Settings"
+          },
+          "children": [
+            {
+              "id": "poll_interval",
+              "type": "number",
+              "label": {
+                "en": "Poll Interval (seconds)"
+              },
+              "value": 5,
+              "min": 1,
+              "max": 60,
+              "hint": {
+                "en": "How often to check the panel status"
+              }
+            }
+          ]
+        }
+      ],
+      "id": "panel"
+    }
+  ]
+}

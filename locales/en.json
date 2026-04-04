@@ -1,0 +1,10 @@
+{
+  "errors": {
+    "connection_failed": "Connection to alarm panel failed",
+    "connection_lost": "Connection to alarm panel lost",
+    "state_change_failed": "Failed to change alarm state"
+  },
+  "pair": {
+    "connection_failed": "Connection failed. Please check your settings and try again."
+  }
+}
