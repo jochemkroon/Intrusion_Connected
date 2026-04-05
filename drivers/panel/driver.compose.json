@@ -4,9 +4,10 @@
   },
   "class": "homealarm",
   "capabilities": [
-    "alarm_generic",
     "homealarm_state",
-    "alarm_message"
+    "alarm_generic",
+    "alarm_message",
+    "zone_status"
   ],
   "capabilitiesOptions": {
     "alarm_message": {

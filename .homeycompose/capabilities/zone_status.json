@@ -1,0 +1,15 @@
+{
+  "type": "string",
+  "title": {
+    "en": "Zone Status",
+    "nl": "Zone Status"
+  },
+  "desc": {
+    "en": "Number of open zones",
+    "nl": "Aantal open zones"
+  },
+  "getable": true,
+  "setable": false,
+  "uiComponent": "sensor",
+  "icon": "/assets/icon.svg"
+}

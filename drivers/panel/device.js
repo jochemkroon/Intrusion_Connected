@@ -15,6 +15,12 @@ module.exports = class SPCPanelDevice extends Homey.Device {
       this.log('Adding alarm_message capability to existing device');
       await this.addCapability('alarm_message');
     }
+    
+    // Add zone_status capability if it doesn't exist (for existing devices)
+    if (!this.hasCapability('zone_status')) {
+      this.log('Adding zone_status capability to existing device');
+      await this.addCapability('zone_status');
+    }
 
     // Get settings
     const settings = this.getSettings();
@@ -30,6 +36,10 @@ module.exports = class SPCPanelDevice extends Homey.Device {
     
     // Track last zone alarm state
     this.lastZoneAlarm = null;
+    
+    // Store zones data
+    this.zones = [];
+    this.zoneCapabilitiesInitialized = false;
 
     // Initialize the API connection
     this.api = null;
@@ -257,6 +267,95 @@ module.exports = class SPCPanelDevice extends Homey.Device {
       if (error.message.includes('Connection') || error.message.includes('timeout') || error.message.includes('ECONNREFUSED')) {
         await this.setUnavailable(this.homey.__('errors.connection_lost'));
       }
+    }
+    
+    // Update zone status
+    await this.updateZones();
+  }
+  
+  /**
+   * Update zone status from the panel
+   */
+  async updateZones() {
+    try {
+      if (!this.api) {
+        return;
+      }
+      
+      // Get zones from the SPC panel
+      const zones = await this.api.getZones();
+      this.zones = zones;
+      
+      if (zones.length === 0) {
+        this.log('No zones found');
+        return;
+      }
+      
+      // Initialize zone capabilities if not done yet
+      if (!this.zoneCapabilitiesInitialized) {
+        this.log(`Initializing capabilities for ${zones.length} zones`);
+        
+        // Remove old zone capabilities that no longer exist
+        const capabilities = this.getCapabilities();
+        for (const cap of capabilities) {
+          if (cap.startsWith('alarm_contact.zone_')) {
+            const zoneNum = parseInt(cap.replace('alarm_contact.zone_', ''));
+            if (!zones.find(z => z.number === zoneNum)) {
+              this.log(`Removing old zone capability: ${cap}`);
+              await this.removeCapability(cap).catch(err => this.error('Error removing capability:', err));
+            }
+          }
+        }
+        
+        // Add capabilities for each zone
+        for (const zone of zones) {
+          const capabilityId = `alarm_contact.zone_${zone.number}`;
+          
+          if (!this.hasCapability(capabilityId)) {
+            this.log(`Adding zone capability: ${capabilityId} - ${zone.name}`);
+            await this.addCapability(capabilityId);
+            
+            // Set capability options (title)
+            await this.setCapabilityOptions(capabilityId, {
+              title: `${zone.number}. ${zone.name}`
+            }).catch(err => this.error(`Error setting options for ${capabilityId}:`, err));
+          }
+        }
+        
+        this.zoneCapabilitiesInitialized = true;
+        this.log('Zone capabilities initialized');
+      }
+      
+      // Update each zone capability with current status
+      for (const zone of zones) {
+        const capabilityId = `alarm_contact.zone_${zone.number}`;
+        
+        // alarm_contact: true = open/alarm/actuated, false = closed/normal
+        const isOpen = zone.open || zone.alarm || zone.actuated || zone.isolated;
+        
+        await this.setCapabilityValue(capabilityId, isOpen).catch(err => 
+          this.error(`Error updating ${capabilityId}:`, err)
+        );
+      }
+      
+      // Update summary in zone_status
+      if (this.hasCapability('zone_status')) {
+        const openCount = zones.filter(z => z.open || z.alarm || z.actuated).length;
+        const omittedCount = zones.filter(z => z.omitted).length;
+        const isolatedCount = zones.filter(z => z.isolated).length;
+        
+        const parts = [];
+        if (openCount > 0) parts.push(`${openCount} open`);
+        if (omittedCount > 0) parts.push(`${omittedCount} omitted`);
+        if (isolatedCount > 0) parts.push(`${isolatedCount} isolated`);
+        
+        const statusText = parts.length > 0 ? parts.join(', ') : `${zones.length} zones normal`;
+        await this.setCapabilityValue('zone_status', statusText);
+      }
+      
+      this.log(`Zone status updated: ${zones.length} zones`);
+    } catch (error) {
+      this.error('Failed to update zones:', error);
     }
   }
 

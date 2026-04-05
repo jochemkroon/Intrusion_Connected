@@ -333,9 +333,10 @@
       },
       "class": "homealarm",
       "capabilities": [
-        "alarm_generic",
         "homealarm_state",
-        "alarm_message"
+        "alarm_generic",
+        "alarm_message",
+        "zone_status"
       ],
       "capabilitiesOptions": {
         "alarm_message": {
@@ -496,6 +497,21 @@
       "desc": {
         "en": "Current system alert (Tamper, Fault, etc.)",
         "nl": "Huidige systeem alarm (Sabotage, Storing, etc.)"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/icon.svg"
+    },
+    "zone_status": {
+      "type": "string",
+      "title": {
+        "en": "Zone Status",
+        "nl": "Zone Status"
+      },
+      "desc": {
+        "en": "Number of open zones",
+        "nl": "Aantal open zones"
       },
       "getable": true,
       "setable": false,
